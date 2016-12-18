@@ -12,13 +12,9 @@ var fs = require('fs');
 var myReadStream = fs.createReadStream(__dirname + '/readable.txt', 'utf8');
 var myWriteStream = fs.createWriteStream(__dirname + '/writable.txt');
 
-myReadStream.on('data', function(chunk){
-    console.log('new chunk received: ');
-    //console.log(chunk);
-    myWriteStream.write(chunk);
-});
+//add .pipe method to readable stream, this does the same as previous .on
+myReadStream.pipe(myWriteStream);
 
-/*
 var server = http.createServer(function(req, res){
     console.log('request was made: ' + req.url );
     res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -27,4 +23,3 @@ var server = http.createServer(function(req, res){
 
 server.listen(3000, '127.0.0.1');
 console.log("ok, now we're listening to port 3000");
-*/
